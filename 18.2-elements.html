@@ -46,8 +46,11 @@ initial-scale=1.0"
       body.style.backgroundColor = "green";
       //--change title text to "hello"--///
       const title = document.getElementsByTagName("title")[0];
+      const title2 = document.querySelector("head title");
       let curText = title.textContent;
       title.textContent = "Hello " + curText;
+      let curText2 = title.textContent;
+      title2.textContent = "Hello2 " + curText2;
     };
   </script>
 </html>

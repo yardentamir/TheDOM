@@ -55,12 +55,19 @@ initial-scale=1.0"
         console.log(input);
       });
 
-      // const allNotQuery = document.body.getElementsByTagName("*");
-      // const allQuery = document.querySelectorAll("body *");
-      // console.log("All without Query :");
-      // console.log(allNotQuery);
-      // console.log("All with Query :");
-      // console.log(allQuery);
+      //----solution2---//
+
+      const allNotQuery = document.body.getElementsByTagName("*");
+      const allElsNoQuery2 = document.body.children;
+      const allQuery = document.querySelectorAll("body *");
+      console.log("All without Query :");
+      console.log(allNotQuery);
+      console.log("All with Query :");
+      console.log(allQuery);
+
+      Array.from(allNotQuery).forEach((element) => {
+        console.log(element);
+      });
     };
   </script>
 </html>
