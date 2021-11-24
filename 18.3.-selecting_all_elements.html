@@ -30,11 +30,20 @@
       const myFourthDiv = document.querySelector("#myFourthDiv");
 
       ///--- my solution ---///
-      const allElements = document.querySelectorAll("div");
+      // const allElements = document.querySelectorAll("div");
 
-      Array.from(allElements).forEach((element, index) => {
-        element.id = "div" + ++index;
-      });
+      // Array.from(allElements).forEach((element, index) => {
+      //   element.id = "div" + ++index;
+      // });
+
+      const [myFirstDiv, mySecondDiv, myThirdDiv, myFourthDiv] =
+        document.querySelectorAll("div");
+
+      // let arr = [myFirstDiv, mySecondDiv, myThirdDiv, myFourthDiv];
+
+      // arr.forEach((element, index) => {
+      //   console.log(arr);
+      // });
     </script>
   </body>
 </html>
