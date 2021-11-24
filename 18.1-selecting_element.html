@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" / >
+    <meta
+      name="viewport"
+      content="width=device-width,
+initial-scale=1.0"
+    />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Header</h1>
+    <p>Paragraph</p>
+    <a href="#">link</a>
+    <img src="" alt="" />
+    <div class="x">Div with a class</div>
+    <div id="y">Div with an id</div>
+    <input type="text" />
+    <input type="text" />
+    <input type="text" />
+  </body>
+  <script>
+    //your js code here
+    "use strict";
+    //--with get by--///
+    window.onload = function () {
+      const h1Get = document.getElementsByTagName("h1");
+      const pGet = document.getElementsByTagName("p");
+      const aGet = document.getElementsByTagName("a");
+      const imgGet = document.getElementsByTagName("img");
+      const xGet = document.getElementsByClassName("x");
+      const yGet = document.getElementById("y");
+      const inputTextGet = document.getElementsByTagName("input");
+
+      console.log("All inputs with get by :");
+
+      Array.from(inputTextGet).forEach((input) => {
+        console.log(input);
+      });
+
+      //--with query--///
+      const h1Query = document.querySelector("h1");
+      const pQuery = document.querySelectorAll("p");
+      const aQuery = document.querySelectorAll("a");
+      const imgQuery = document.querySelectorAll("img");
+      const xQuery = document.querySelectorAll(".x");
+      const yQuery = document.querySelector("#y");
+      const inputTextQuery = document.querySelectorAll("input");
+
+      console.log("All inputs with query :");
+
+      Array.from(inputTextQuery).forEach((input) => {
+        console.log(input);
+      });
+
+      // const allNotQuery = document.body.getElementsByTagName("*");
+      // const allQuery = document.querySelectorAll("body *");
+      // console.log("All without Query :");
+      // console.log(allNotQuery);
+      // console.log("All with Query :");
+      // console.log(allQuery);
+    };
+  </script>
+</html>
