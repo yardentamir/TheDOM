@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Mulish", sans-serif;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        overflow: hidden;
+        margin: 0;
+        font-size: 24px;
+      }
+
+      .container {
+        border: 3px black solid;
+        border-radius: 10px;
+        padding: 50px;
+        text-align: center;
+      }
+
+      .code-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 40px 0;
+      }
+
+      .code {
+        border-radius: 5px;
+        font-size: 75px;
+        height: 120px;
+        width: 100px;
+        border: 1px solid #eee;
+        margin: 1%;
+        text-align: center;
+        font-weight: 300;
+        -moz-appearance: textfield;
+      }
+
+      .code::-webkit-outer-spin-button,
+      .code::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+
+      .code:valid {
+        border-color: #3498db;
+        box-shadow: 0 10px 10px -5px rgba(0, 0, 0, 0.25);
+      }
+
+      .verify-btn {
+        padding: 10px 30px;
+        font-size: 17px;
+        background-color: black;
+        color: white;
+        border-radius: 10px;
+      }
+      .display-none {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Text to copy:</h2>
+      <p>123456</p>
+      <div class="code-container">
+        <input type="number" class="code" min="0" max="9" required />
+        <input type="number" class="code" min="0" max="9" required />
+        <input type="number" class="code" min="0" max="9" required />
+        <input type="number" class="code" min="0" max="9" required />
+        <input type="number" class="code" min="0" max="9" required />
+        <input type="number" class="code" min="0" max="9" required />
+      </div>
+      <!-- <input class="verify-btn" type="button" value="verify" /> -->
+      <div id="correct" class="display-none">Correct!</div>
+    </div>
+    <script>
+      //  Many times an application needs to verify the account by
+      // sending a verification code by text message.
+      // Lets create a functionality the enables the user to paste the
+      // verification code to the input fields.
+      // Features:
+      // 1. The user is allowed to type the values manually. After
+      // each value is inserted, the next input will be focused.
+      // 2. The user is allowed to paste the verification code.
+      // 3. An extra challenge will be to auto submit the form once
+      // all inputs all populated.
+      // Things to thing about:
+      // What happens if the user pastes only 3 digits and there are
+      // 6 inputs to fill out.
+
+      const target = document.querySelectorAll("input");
+
+      // //window.clipboardData.getData('Text')
+
+      // target.addEventListener("paste", (event) => {
+      //   let paste = event.clipboardData.getData("123456");
+
+      //   event.preventDefault();
+      // });
+
+      ///-------------------------------------//
+
+      let arr = [];
+      target.forEach((input, idx) => {
+        input.addEventListener("input", (e) => {
+          const showMsg = document.querySelector("#correct");
+          arr[idx] = input.value;
+          console.log(arr);
+          if (arr.join("") === "123456") {
+            showMsg.classList.remove("display-none");
+          } else {
+            showMsg.classList.add("display-none");
+          }
+        });
+      });
+      //-----------------------------------//
+
+      const codes = document.querySelectorAll(".code");
+
+      codes[0].focus();
+
+      codes.forEach((code, idx) => {
+        code.addEventListener("keydown", (e) => {
+          if (e.key >= 0 && e.key <= 9) {
+            codes[idx].value = "";
+            setTimeout(() => {
+              if (codes[idx + 1]) codes[idx + 1].focus();
+            }, 10);
+          } else if (e.key === "Backspace") {
+            setTimeout(() => {
+              if (codes[idx].value == "" && idx != 0) codes[idx - 1].focus();
+            }, 10);
+          }
+        });
+      });
+
+      codes.forEach((code, idx) => {
+        code.addEventListener("paste", (e) => {
+          const data = e.clipboardData.getData("text");
+          const showMsg = document.querySelector("#correct");
+          if (data === "123456") {
+            showMsg.classList.remove("display-none");
+          } else {
+            showMsg.classList.add("display-none");
+          }
+          // if (e.key >= 0 && e.key <= 9) {
+          setTimeout(() => (code.value = ""), 10);
+          console.log(code);
+          codes.forEach((c, i) => {
+            setTimeout(() => (c.value = data[i]), 10);
+          });
+          // }
+        });
+      });
+    </script>
+  </body>
+</html>
