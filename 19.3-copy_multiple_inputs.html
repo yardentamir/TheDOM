@@ -117,7 +117,6 @@
         input.addEventListener("input", (e) => {
           const showMsg = document.querySelector("#correct");
           arr[idx] = input.value;
-          console.log(arr);
           if (arr.join("") === "123456") {
             showMsg.classList.remove("display-none");
           } else {
@@ -155,13 +154,10 @@
           } else {
             showMsg.classList.add("display-none");
           }
-          // if (e.key >= 0 && e.key <= 9) {
           setTimeout(() => (code.value = ""), 10);
-          console.log(code);
           codes.forEach((c, i) => {
             setTimeout(() => (c.value = data[i]), 10);
           });
-          // }
         });
       });
     </script>
