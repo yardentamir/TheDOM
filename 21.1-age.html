@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .container {
+        width: 50%;
+        margin: 0 auto;
+        text-align: center;
+      }
+      .display-none {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div>Enter your age:</div>
+      <input type="number" name="age" id="ageInput" pattern="[0-130]+" />
+      <input type="button" value="submit" />
+      <div id="can" class="display-none msg">You can drink!</div>
+      <div id="cant" class="display-none msg">You are too young!</div>
+    </div>
+
+    <script>
+      const btnSubmit = document.querySelector("input[type='button']");
+
+      const canDrink = (e) => {
+        const ageInput = document.querySelector("#ageInput");
+        const canMsg = document.querySelector("#can");
+        const cantMsg = document.querySelector("#cant");
+        const allMsg = document.querySelectorAll(".msg");
+
+        //clear classes
+        allMsg.forEach((msgDiv) => {
+          msgDiv.classList.add("display-none");
+        });
+
+        //remove disappearance classes from the relevant div
+        ageInput.value > 17
+          ? canMsg.classList.remove("display-none")
+          : cantMsg.classList.remove("display-none");
+      };
+
+      btnSubmit.addEventListener("click", canDrink);
+    </script>
+  </body>
+</html>

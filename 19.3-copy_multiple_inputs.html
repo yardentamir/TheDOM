@@ -100,7 +100,7 @@
       // What happens if the user pastes only 3 digits and there are
       // 6 inputs to fill out.
 
-      const target = document.querySelectorAll("input");
+      const inputs = document.querySelectorAll("input");
 
       // //window.clipboardData.getData('Text')
 
@@ -113,7 +113,7 @@
       ///-------------------------------------//
 
       let arr = [];
-      target.forEach((input, idx) => {
+      inputs.forEach((input, idx) => {
         input.addEventListener("input", (e) => {
           const showMsg = document.querySelector("#correct");
           arr[idx] = input.value;
@@ -148,11 +148,11 @@
       codes.forEach((code, idx) => {
         code.addEventListener("paste", (e) => {
           const data = e.clipboardData.getData("text");
-          const showMsg = document.querySelector("#correct");
+          const showMsgDiv = document.querySelector("#correct");
           if (data === "123456") {
-            showMsg.classList.remove("display-none");
+            showMsgDiv.classList.remove("display-none");
           } else {
-            showMsg.classList.add("display-none");
+            showMsgDiv.classList.add("display-none");
           }
           setTimeout(() => (code.value = ""), 10);
           codes.forEach((c, i) => {
