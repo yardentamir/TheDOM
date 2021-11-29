@@ -37,11 +37,11 @@
       const btns = document.querySelectorAll("input[type='button']");
 
       const changeFontSize = (btn) => {
-        const currentStyle = window
-          .getComputedStyle(sizeMeDiv)
-          .getPropertyValue("font-size");
-        let getNumFont = parseInt(currentStyle.replace("px", ""));
-        console.log(getNumFont);
+        // const currentStyle = window
+        //   .getComputedStyle(sizeMeDiv)
+        //   .getPropertyValue("font-size");
+        const currentStyle = getComputedStyle(sizeMeDiv).fontSize;
+        let getNumFont = parseInt(currentStyle);
         if (btn === "+") {
           if (getNumFont < 100) {
             sizeMeDiv.style.fontSize = ++getNumFont + "px";

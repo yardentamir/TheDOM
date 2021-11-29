@@ -23,25 +23,98 @@
         top: 10%;
         left: 50%;
       }
+      .center {
+        text-align: center;
+        padding-bottom: 10px;
+      }
+
+      input[type="button"] {
+        padding: 10px 20px;
+      }
+      .flex {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-bottom: 20px;
+      }
+
+      .flex > * {
+        margin: 0 10px;
+      }
     </style>
   </head>
   <body>
-    <div class="container">
-      <table>
-        <tr>
-          <th>Firstname</th>
-          <th>Lastname</th>
-        </tr>
-        <tr>
-          <td>Peter</td>
-          <td>Griffin</td>
-        </tr>
-        <tr>
-          <td>Lois</td>
-          <td>Griffin</td>
-        </tr>
-      </table>
-    </div>
-    <script></script>
+    <div class="container"></div>
+    <script>
+      const arrHeader = ["First Name", "Last Name"];
+
+      //create inputs
+      const dynamicInputs = () => {
+        const inputsDiv = document.createElement("div");
+        document.querySelector(".container").appendChild(inputsDiv);
+        inputsDiv.classList.add("center");
+
+        const flexDiv = document.createElement("div");
+        flexDiv.classList.add("flex");
+        inputsDiv.appendChild(flexDiv);
+
+        for (let i = 0; i < 2; i++) {
+          const labelForInput = document.createElement("label");
+          labelForInput.textContent = arrHeader[i] + ":";
+          flexDiv.appendChild(labelForInput);
+          const textInput = document.createElement("input");
+          textInput.type = "text";
+          flexDiv.appendChild(textInput);
+        }
+
+        const btnInput = document.createElement("input");
+        btnInput.type = "button";
+        btnInput.value = "Add full name to the table";
+        inputsDiv.appendChild(btnInput);
+      };
+
+      //create table
+      const dynamicTable = () => {
+        const table = document.createElement("table");
+        const tableBody = document.createElement("tbody");
+        const tableRow = document.createElement("tr");
+
+        for (let i = 0; i < arrHeader.length; i++) {
+          const tableHeader = document.createElement("th");
+          tableHeader.textContent = arrHeader[i];
+          tableRow.appendChild(tableHeader);
+        }
+
+        tableBody.appendChild(tableRow);
+        table.appendChild(tableBody);
+        document.querySelector(".container").appendChild(table);
+      };
+
+      //create my table and inputs on page load
+      dynamicInputs();
+      dynamicTable();
+
+      // create new row of new full name
+      const btnClick = () => {
+        const textInputs = document.querySelectorAll("input[type=text]");
+        for (const textInput of textInputs) {
+          if (!textInput.value) return;
+        }
+
+        console.log("Click");
+        const tableRow = document.createElement("tr");
+        document.querySelector("tbody").appendChild(tableRow);
+
+        for (const textInput of textInputs) {
+          const tableCell = document.createElement("td");
+          tableCell.textContent = textInput.value;
+          tableRow.appendChild(tableCell);
+        }
+      };
+
+      document
+        .querySelector("input[type='button']")
+        .addEventListener("click", btnClick);
+    </script>
   </body>
 </html>
