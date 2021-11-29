@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>100 Characters alert</title>
+    <style>
+      .container {
+        width: 50%;
+        margin: 0 auto;
+      }
+      form * {
+        display: block;
+        margin-top: 10px;
+      }
+      input {
+        padding: 10px 20px;
+      }
+      textarea {
+        width: 350px;
+      }
+      .display-none {
+        display: none;
+      }
+      .alert {
+        color: red;
+        font-weight: bold;
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <form>
+        <label for="textarea">Why are you interested in this position?</label>
+        <textarea name="textarea" id="textArea" cols="30" rows="10"></textarea>
+        <input type="button" value="Click here!" />
+      </form>
+      <div class="display-none alert">
+        Not enough characters. Please enter at least 100 characters.
+      </div>
+    </div>
+    <script>
+      const textarea = document.querySelector("textarea");
+      const btn = document.querySelector("input[type='button']");
+
+      btn.addEventListener("click", () => {
+        const alertDiv = document.querySelector(".alert");
+        if (textarea.value.length < 100) {
+          alertDiv.classList.remove("display-none");
+        } else {
+          alertDiv.classList.add("display-none");
+        }
+      });
+    </script>
+  </body>
+</html>

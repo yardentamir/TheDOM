@@ -1,60 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <style>
-    .container {
-      width: 50%;
-      margin: 0 auto;
-      text-align: center;
-    }
-    .flex {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    input {
-      padding: 10px 20px;
-      margin: 10px;
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <div id="sizeMe">Font Size</div>
-    <div class="flex">
-    <!-- <input type="button" value="+" onclick="changeFontSize(this.value)" />
-    <input type="button" value="-" onclick="changeFontSize(this.value)" /> -->
-    <input type="button" value="+" />
-    <input type="button" value="-" />
-  </div>
-  </div>
-<script>
-const sizeMeDiv = document.querySelector("#sizeMe");
-const btns = document.querySelectorAll("input[type='button']");
-
-const changeFontSize = (btn) => {
-  const currentStyle = window.getComputedStyle(sizeMeDiv, null).getPropertyValue('font-size');
-  let getNumFont = parseInt(currentStyle.replace('px', ''));
-  console.log(getNumFont);
-    if(btn === "+"){
-      if(getNumFont < 100){  
-      sizeMeDiv.style.fontSize = ++getNumFont + 'px';
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .container {
+        width: 50%;
+        margin: 0 auto;
+        text-align: center;
       }
-    }else if(btn === "-"){
-      if(getNumFont > 6){  
-        sizeMeDiv.style.fontSize = --getNumFont + 'px';
-     }
-    }
-  
-}
+      .flex {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      input {
+        padding: 10px 20px;
+        margin: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div id="sizeMe">Font Size</div>
+      <div class="flex">
+        <!-- <input type="button" value="+" onclick="changeFontSize(this.value)" />
+    <input type="button" value="-" onclick="changeFontSize(this.value)" /> -->
+        <input type="button" value="+" />
+        <input type="button" value="-" />
+      </div>
+    </div>
+    <script>
+      const sizeMeDiv = document.querySelector("#sizeMe");
+      const btns = document.querySelectorAll("input[type='button']");
 
-btns.forEach((btn) => {
-  btn.addEventListener("click", () => changeFontSize(btn.value));
-});
+      const changeFontSize = (btn) => {
+        const currentStyle = window
+          .getComputedStyle(sizeMeDiv)
+          .getPropertyValue("font-size");
+        let getNumFont = parseInt(currentStyle.replace("px", ""));
+        console.log(getNumFont);
+        if (btn === "+") {
+          if (getNumFont < 100) {
+            sizeMeDiv.style.fontSize = ++getNumFont + "px";
+          }
+        } else if (btn === "-") {
+          if (getNumFont > 6) {
+            sizeMeDiv.style.fontSize = --getNumFont + "px";
+          }
+        }
+      };
 
-</script>
+      btns.forEach((btn) => {
+        btn.addEventListener("click", () => changeFontSize(btn.value));
+      });
+    </script>
+  </body>
 </html>
