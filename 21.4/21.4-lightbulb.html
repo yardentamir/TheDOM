@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .container {
+        width: 50%;
+        margin: 0 auto;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <img
+        src="/21.4/pic_bulbon.gif"
+        class="img on"
+        width="150px"
+        height="250px"
+      />
+    </div>
+    <script>
+      const lightBulb = document.querySelector("img");
+
+      lightBulb.addEventListener("click", () => {
+        if (lightBulb.classList.contains("on")) {
+          lightBulb.src = "/21.4/pic_bulboff.gif";
+          console.log("off");
+          lightBulb.classList.remove("on");
+          lightBulb.classList.add("off");
+        } else {
+          lightBulb.src = "/21.4/pic_bulbon.gif";
+          console.log("on");
+          lightBulb.classList.add("on");
+          lightBulb.classList.remove("off");
+        }
+      });
+    </script>
+  </body>
+</html>
