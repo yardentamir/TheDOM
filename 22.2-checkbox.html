@@ -101,6 +101,9 @@ label input:checked ~ span i::after{
     margin-top:50px;
     min-height: 100vh;
     }
+    .visibility-hidden{
+visibility: hidden;
+    }
   </style>
 </head>
 <body>
@@ -111,11 +114,17 @@ label input:checked ~ span i::after{
           <i></i>
       </span>
   </label>
-  <img class="fit-picture"
-     src="/media/cc0-images/grapefruit-slice-332-332.jpg"
-     alt="Grapefruit slice atop a pile of other slices">
+  <img class="fit-picture visibility-hidden"
+     src="/19.3/smily-hd-smily-hd-images-label-text-banana-plant-transparent-png-2248425.png"
+     alt="smiley" width="200" height="200"  />
   </div>
   <script>
+      const checkboxElement = document.querySelector("input[type='checkbox']");
+      console.log(checkboxElement.checked);
+      checkboxElement.addEventListener("change" , () => {
+        document.querySelector("img").classList.toggle("visibility-hidden");
+      })
+
     </script>
 </head>
 <body>
