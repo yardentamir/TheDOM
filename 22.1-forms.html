@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Forms</title>
     <style>
-      input[type="button"] {
+      input[type="button"],
+      input[type="submit"] {
         padding: 10px 20px;
       }
       .container {
@@ -25,8 +26,10 @@
         <input type="number" id="age" class="input-group" /><br /><br />
         <label for="email">Email:</label><br />
         <input type="email" id="email" class="input-group" /><br /><br />
+        <label for="email">Address:</label><br />
+        <input type="address" id="address" class="input-group" /><br /><br />
         <input type="button" value="Confirm" />
-        <input type="button" id="changeInfo" value="Change information" />
+        <input type="submit" id="changeInfo" value="Change information" />
       </form>
     </div>
     <script>
@@ -36,34 +39,29 @@
       const containerElement = document.querySelector(".container");
 
       //confirm function
-      confirmButton.addEventListener("click", () => {
-        if (document.querySelector("#ConfirmMsg"))
-          containerElement.removeChild(document.querySelector("#ConfirmMsg"));
-
+      confirmButton.addEventListener("click", (e) => {
+        e.preventDefault();
         for (const input of inputsGroup) {
-          if (!input.value) {
-            if (document.querySelector("#ConfirmMsg"))
-              containerElement.removeChild(
-                document.querySelector("#ConfirmMsg")
-              );
-            return false;
-          }
+          if (!input.value) return false;
         }
+
+        const strInputsKeys = {};
         for (const input of inputsGroup) {
+          strInputsKeys[input.id] = input.value;
           input.disabled = true;
         }
+        console.log(strInputsKeys);
+        let str = "";
+        for (const key of Object.keys(strInputsKeys)) {
+          str += key + "=" + strInputsKeys[key] + " ";
+        }
+        console.log(str);
 
-        const ConfirmMsg = document.createElement("div");
-        ConfirmMsg.textContent =
-          "congratulations you successfully sent this form";
-        ConfirmMsg.id = "ConfirmMsg";
-        document.querySelector(".container").appendChild(ConfirmMsg);
+        confirm("congratulations you successfully sent this form, \n" + str);
       });
 
       // change information function
       changeInfoButton.addEventListener("click", () => {
-        if (document.querySelector("#ConfirmMsg"))
-          containerElement.removeChild(document.querySelector("#ConfirmMsg"));
         for (const input of inputsGroup) {
           input.disabled = false;
         }
