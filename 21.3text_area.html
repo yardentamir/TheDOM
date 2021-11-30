@@ -42,12 +42,12 @@
       </div>
     </div>
     <script>
-      const textarea = document.querySelector("textarea");
-      const btn = document.querySelector("input[type='button']");
+      const textareaElement = document.querySelector("textarea");
+      const buttonElement = document.querySelector("input[type='button']");
 
-      btn.addEventListener("click", () => {
+      buttonElement.addEventListener("click", () => {
         const alertDiv = document.querySelector(".alert");
-        if (textarea.value.length < 100) {
+        if (textareaElement.value.length < 100) {
           alertDiv.classList.remove("display-none");
         } else {
           alertDiv.classList.add("display-none");
