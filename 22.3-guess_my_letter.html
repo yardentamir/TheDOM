@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Guess The Letter</title>
+    <style>
+      .container {
+        width: 50%;
+        margin: 0 auto;
+        text-align: center;
+      }
+      .square {
+        height: 50px;
+        width: 50px;
+        border: 2px solid black;
+        text-align: center;
+        margin: 0 auto;
+      }
+      .square span {
+        display: flex;
+        align-content: center;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        font-size: 28px;
+      }
+
+      .visibility-hidden {
+        visibility: hidden;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Welcome To Guess My Letter</h2>
+      <br />
+      <div class="square"><span>?</span></div>
+      <h3 class="msg">Guess a Letter</h3>
+      <h3 class="title-keys">Keys guessed</h3>
+      <p class="keys"></p>
+      <div id="playAgainDiv" class="visibility-hidden">
+        <h3>Would you like to play again?</h3>
+        <button id="again">Yes</button>
+      </div>
+    </div>
+    <script>
+      const playAgainDiv = document.querySelector("#playAgainDiv");
+      const titleKeys = document.querySelector(".title-keys");
+      const userKeys = document.querySelector(".keys");
+      const squareDiv = document.querySelector(".square span");
+      const msgDiv = document.querySelector(".msg");
+
+      let guessedCharactersArr = [];
+      let randomChar = "";
+
+      const randomLetterFunc = () => {
+        const characters = "abcdefghijklmnopqrstuvwxyz";
+        randomChar = characters.charAt(
+          Math.floor(Math.random() * characters.length)
+        );
+        console.log(randomChar);
+        guessedCharactersArr = [];
+        squareDiv.textContent = "?";
+        msgDiv.style.color = "black";
+        msgDiv.textContent = "Guess a Letter";
+        userKeys.textContent = "";
+        playAgainDiv.classList.add("visibility-hidden");
+        document.addEventListener("keydown", keypressListener);
+      };
+
+      const keypressListener = (event) => {
+        // event.key is a string representing which key has been pressed
+
+        const userSelectedChar = String.fromCharCode(
+          event.keyCode
+        ).toLowerCase();
+
+        if (!/^[a-zA-Z]+$/.test(userSelectedChar)) {
+          msgDiv.style.color = "red";
+          msgDiv.textContent = "Please enter a valid letter";
+          return false;
+        }
+        if (randomChar !== userSelectedChar) {
+          userGuessedWrong(msgDiv, userSelectedChar);
+          return false;
+        }
+        userWins(msgDiv, event);
+      };
+
+      const userGuessedWrong = (msgDiv, userSelectedChar) => {
+        msgDiv.style.color = "red";
+        if (guessedCharactersArr.includes(userSelectedChar)) {
+          msgDiv.textContent = userSelectedChar + " has already been guessed!";
+          return;
+        }
+        guessedCharactersArr.push(userSelectedChar);
+        msgDiv.textContent = "Nope, wrong letter!";
+
+        userKeys.textContent = guessedCharactersArr.join(",");
+      };
+
+      const userWins = (msgDiv, event) => {
+        msgDiv.style.color = "green";
+        msgDiv.textContent = "You guessed it!";
+
+        titleKeys.classList.add("visibility-hidden");
+        playAgainDiv.classList.remove("visibility-hidden");
+
+        squareDiv.textContent = randomChar;
+
+        document.removeEventListener("keydown", keypressListener);
+      };
+
+      randomLetterFunc();
+      document
+        .querySelector("#again")
+        .addEventListener("click", randomLetterFunc);
+    </script>
+  </body>
+</html>
