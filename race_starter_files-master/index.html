@@ -104,6 +104,7 @@
         });
         finishGameDiv.classList.add("visibility-hidden");
         document.addEventListener("keyup", gamePlayFunc);
+        document.removeEventListener("keyup", restartGame);
       }
     };
 
