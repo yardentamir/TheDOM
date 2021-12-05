@@ -10,14 +10,19 @@
     <div id="clock" class="center"></div>
     <script>
       const clockElement = document.querySelector("#clock");
+
+      const checkLength = (whoToCheck) => {
+        return String(whoToCheck).length === 1 ? "0" + whoToCheck : whoToCheck;
+      };
+
       setInterval(() => {
         const today = new Date();
         clockElement.textContent =
-          today.getHours() +
+          checkLength(today.getHours()) +
           ":" +
-          today.getMinutes() +
+          checkLength(today.getMinutes()) +
           ":" +
-          today.getSeconds();
+          checkLength(today.getSeconds());
       }, 1000);
     </script>
   </body>
