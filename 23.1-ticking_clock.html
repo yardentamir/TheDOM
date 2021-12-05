@@ -11,18 +11,18 @@
     <script>
       const clockElement = document.querySelector("#clock");
 
-      const checkLength = (whoToCheck) => {
+      const addZeros = (whoToCheck) => {
         return String(whoToCheck).length === 1 ? "0" + whoToCheck : whoToCheck;
       };
 
       setInterval(() => {
         const today = new Date();
         clockElement.textContent =
-          checkLength(today.getHours()) +
+          addZeros(today.getHours()) +
           ":" +
-          checkLength(today.getMinutes()) +
+          addZeros(today.getMinutes()) +
           ":" +
-          checkLength(today.getSeconds());
+          addZeros(today.getSeconds());
       }, 1000);
     </script>
   </body>

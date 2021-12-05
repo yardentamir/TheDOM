@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>stop watch</title>
+    <style>
+      .container {
+        width: 50%;
+        margin: 0 auto;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div id="clock" class="center">
+        <p>
+          <span id="minutes">00</span>:<span id="seconds">00</span>:<span
+            id="milSec"
+            >00</span
+          >
+        </p>
+      </div>
+      <div>
+        <button id="startButton" data-start-stop="start" type="button">
+          start
+        </button>
+        <button id="stopButton" data-start-stop="stop" type="button">
+          stop
+        </button>
+      </div>
+    </div>
+    <script>
+      //     Create a web page that has a stopwatch with a start and stop button.
+      // • The stop watch should have milliseconds, seconds and minutes.
+      // • When you click on the start button for the first time, the timer will start
+      // running (from 00:00:00 to 60:00:00 minutes)
+      // • When you click on the stop button, it will freeze the time that elapsed
+      // from the start.
+      // • When you click start again it will continue counting the time, from
+      // where it stopped.
+
+      let timerInterval;
+
+      const startStopListener = ({ target }) => {
+        if (target.dataset.startStop === "start") {
+          timerInterval = setInterval(timer, 10);
+          return;
+        }
+        clearInterval(timerInterval);
+      };
+
+      let milSec = 0,
+        sec = 0,
+        min = 0,
+        hour = 0;
+
+      const addZeros = (whoToCheck) => {
+        return String(whoToCheck).length === 1 ? "0" + whoToCheck : whoToCheck;
+      };
+
+      const timer = () => {
+        milSec++;
+
+        if (milSec === 100) {
+          milSec = 0;
+          sec++;
+        }
+
+        if (sec === 60) {
+          sec = 0;
+          min++;
+        }
+
+        document.querySelector("#milSec").textContent = addZeros(milSec);
+        document.querySelector("#seconds").textContent = addZeros(sec);
+        document.querySelector("#minutes").textContent = addZeros(min);
+      };
+
+      document.querySelectorAll("[data-start-stop]").forEach((btn) => {
+        btn.addEventListener("click", startStopListener);
+      });
+    </script>
+  </body>
+</html>
