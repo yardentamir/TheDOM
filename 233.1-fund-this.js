@@ -23,7 +23,7 @@ const myFuncDec = function () {
   console.log(this);
 };
 myFuncDec();
-// * answer : This in this case is pointing to myFuncDec function because this is in myFuncDec function scope.
+// * answer : This in this case is pointing to window because this is in myFuncDec function scope and there is no parent.
 // Question 4:
 // ? In your own words what will this point to and why?
 const myFuncArrow = () => {
