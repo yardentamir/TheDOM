@@ -50,12 +50,11 @@
           strInputsKeys[input.id] = input.value;
           input.disabled = true;
         }
-        console.log(strInputsKeys);
+
         let str = "";
         for (const key of Object.keys(strInputsKeys)) {
           str += key + "=" + strInputsKeys[key] + "\n";
         }
-        console.log(str);
 
         confirm("congratulations you successfully sent this form, \n" + str);
       });
