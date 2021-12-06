@@ -5,17 +5,19 @@
 // arrow functions.
 
 const myObj = {
-  firstName: "Yarden",
-  lastName: "Tamir",
+  name: "Yarden",
   printFullName() {
-    console.log(`Hello ${this.firstName} ${this.lastName}!`);
+    console.log(`Hello ${this.name}!`);
   },
   printFullNameAfterSecond() {
-    setTimeout(function () {
-      console.log(`Hello ${this.firstName} ${this.lastName}!`);
-    }, 1000);
+    setTimeout(
+      function () {
+        console.log(`Hello ${this.name}!`);
+      }.bind(this),
+      1000
+    );
   },
 };
 
 myObj.printFullName.call(myObj);
-myObj.printFullName();
+myObj.printFullNameAfterSecond.call(myObj);
