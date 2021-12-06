@@ -10,12 +10,7 @@ const myObj = {
     console.log(`Hello ${this.name}!`);
   },
   printFullNameAfterSecond() {
-    setTimeout(
-      function () {
-        console.log(`Hello ${this.name}!`);
-      }.bind(this),
-      1000
-    );
+    setTimeout(this.printFullName.bind(this), 1000);
   },
 };
 
