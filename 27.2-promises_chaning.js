@@ -10,6 +10,8 @@
 const arrOfWords = ["hoo", "boo"];
 const arrOfWords2 = ["hoo", "boo", 5];
 
+const allArr = [arrOfWords, arrOfWords2];
+
 const makeAllCaps = (arrBeforeCapitalize) => {
   return new Promise(function (resolve, reject) {
     resolve(
@@ -27,25 +29,29 @@ const sortWords = (arrBeforeSorted) => {
   });
 };
 
-// success
-makeAllCaps(arrOfWords)
-  .then((arrCapitalized) => {
-    sortWords(arrCapitalized).then((arrCapitalizedSorted) => {
-      console.log(arrCapitalizedSorted);
+// success and failure
+allArr.forEach((arrOfWords) => {
+  makeAllCaps(arrOfWords)
+    .then((arrCapitalized) => {
+      sortWords(arrCapitalized).then((arrCapitalizedSorted) => {
+        console.log(arrCapitalizedSorted);
+      });
+    })
+    .catch((err) => {
+      console.log(`${err} isn't a word`);
     });
-  })
-  .catch((err) => {
-    console.log(`the word ${err} includes not only letters`);
-  });
+});
 
-// failure
-makeAllCaps(arrOfWords2)
-  .then((arrCapitalized) => {
-    console.log(arrCapitalized);
-    sortWords(arrCapitalized).then((arrCapitalizedSorted) => {
+// success and failure solution 2
+allArr.forEach((arrOfWords) => {
+  makeAllCaps(arrOfWords)
+    .then((arrCapitalized) => {
+      return sortWords(arrCapitalized);
+    })
+    .then((arrCapitalizedSorted) => {
       console.log(arrCapitalizedSorted);
+    })
+    .catch((err) => {
+      console.log(`${err} isn't a word`);
     });
-  })
-  .catch((err) => {
-    console.log(`${err} isn't a word`);
-  });
+});
