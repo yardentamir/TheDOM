@@ -8,7 +8,7 @@ const baseURL = "https://api.jokes.one/jod";
 const buttonText = [
   "Ugh.",
   "🤦🏻‍♂️",
-  "omg dad.",
+  "omg what a joke.",
   "you are the worst",
   "seriously",
   "stop it.",
