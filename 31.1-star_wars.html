@@ -158,7 +158,6 @@
             const objForEachCharacter = { name, height, hair_color };
             planetData(homeworld, objForEachCharacter);
           }
-          await printToTable();
         } catch (error) {
           throw new Error(error.message);
         }
@@ -173,6 +172,9 @@
         } catch (error) {
           throw new Error(error.message);
         }
+        arrayOfObjects.length === 10
+          ? printToTable()
+          : console.log("loading", arrayOfObjects.length);
       };
 
       const printToTable = async () => {
@@ -187,23 +189,26 @@
           createThElement.textContent = key;
           tableTheadElement.append(createThElement);
         });
-        console.log("arrayOfObjects.length: " + arrayOfObjects.length);
-        arrayOfObjects.forEach((character, index) => {
-          const createTrElement = document.createElement("tr");
-          Object.values(character).forEach((information, index) => {
-            if (index != 3) {
-              const createTdElement = document.createElement("td");
-              createTdElement.textContent = information;
-              createTrElement.append(createTdElement);
-            } else {
-              Object.values(information).forEach((innerInformation) => {
-                const createTdElement2 = document.createElement("td");
-                createTdElement2.textContent = innerInformation;
-                createTrElement.append(createTdElement2);
-              });
-            }
-          });
-          tableTbodyElement.append(createTrElement);
+        arrayOfObjects.forEach((item) => {
+          console.log(item.height);
+          const tr = document.createElement("tr");
+          let td1 = document.createElement("td");
+          td1.innerHTML += item.name;
+          let td2 = document.createElement("td");
+          td2.innerHTML += item.hair;
+          let td3 = document.createElement("td");
+          td3.innerHTML += item.height;
+          let td4 = document.createElement("td");
+          td4.innerHTML += item.planet.name;
+          let td5 = document.createElement("td");
+          td5.innerHTML += item.planet.population;
+          tr.appendChild(td1);
+          tr.appendChild(td2);
+          tr.appendChild(td3);
+          tr.appendChild(td4);
+          tr.appendChild(td5);
+
+          tableTbodyElement.appendChild(tr);
         });
       };
 
