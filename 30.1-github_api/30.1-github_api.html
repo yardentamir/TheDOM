@@ -14,6 +14,8 @@
     <style>
       body {
         background: #f2f2f2;
+        width: 100%;
+        min-height: 100vh;
       }
 
       a {
@@ -104,7 +106,7 @@
       .flex-container {
         display: flex;
         justify-content: center;
-        align-items: baseline;
+        flex-wrap: wrap;
       }
       .flex-container > * {
         margin: 5px;
@@ -127,8 +129,8 @@
             class="searchTerm"
             placeholder="Enter github name"
           />
-          <button id="SearchButton" type="submit" class="searchButton">
-            <i class="fa fa-search"></i>
+          <button id="SearchButton" class="searchButton">
+            <i id="SearchButton" class="fa fa-search"></i>
           </button>
         </div>
       </div>
@@ -144,7 +146,7 @@
       };
 
       const startSearch = (event) => {
-        if (event.keyCode === 13 || event.target.id === "SearchButton") {
+        if (event.keyCode === 13 || event.target.id == "SearchButton") {
           const userSearch = searchInput.value;
           myAsyncFunc(userSearch);
           searchInput.value = "";
@@ -154,7 +156,9 @@
       const myAsyncFunc = async (userSearch) => {
         try {
           const baseUrl = "https://api.github.com/users/";
-          const data = await (await fetch(baseUrl + userSearch)).json();
+          const response = await fetch(baseUrl + userSearch);
+          if (!response.ok) response;
+          const data = await response.json();
           console.log(data);
           const { name, avatar_url, public_repos, html_url } = data;
           const htmlCard = `<div class="card">
@@ -167,8 +171,8 @@
           </div>
         </div>`;
           searchResultsDiv.innerHTML += htmlCard;
-        } catch {
-          throw new Error(`Failed to fetch`);
+        } catch (error) {
+          throw new Error(error);
         }
       };
 
