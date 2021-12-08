@@ -60,9 +60,9 @@ const getRecipe2 = (recipeID) => {
 
 const myAsyncFunc = async () => {
   try {
-    const getIds = await getIDs();
-    const done = await getRecipe(getIds[2]);
-    console.log(done);
+    // const getIds = await getIDs();
+    const data = await getRecipe((await getIDs())[2]);
+    console.log(data);
   } catch {
     throw new Error("It is an error");
   }
